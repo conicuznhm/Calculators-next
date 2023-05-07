@@ -1,7 +1,7 @@
 import { useAppSelector, useAppDispatch } from "@/redux/store";
 export default function Screen() {
   const input = useAppSelector(state => state.cal.input);
-  const result = useAppSelector(state => state.cal.result);
+  const result = useAppSelector(state => state.cal.preValue);
   const op = useAppSelector(state => state.cal.operator);
   console.log("input", input);
   console.log("result", result);

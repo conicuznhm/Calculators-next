@@ -26,8 +26,9 @@ const calSlice = createSlice({
         case "+":
           state.operator = action.payload;
           state.input = initialState.input;
-          state.result = state.preValue + state.value;
-          state.preValue = state.result;
+          state.preValue += state.value;
+          // state.result = state.preValue + state.value;
+          // state.preValue = state.result;
           break;
         default:
           break;
