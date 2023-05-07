@@ -9,7 +9,7 @@ export default function Screen() {
   return (
     <>
       <div className="text-white">Screen</div>
-      <div className="text-white">{op ? result : input}</div>
+      <div className="text-white">{op ? result : input || "0"}</div>
     </>
   );
 }
