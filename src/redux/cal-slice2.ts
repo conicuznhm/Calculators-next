@@ -16,13 +16,47 @@ const initialState: CalState = {
   input: ""
 };
 
+const equal = (operator: string, preValue: number, value: number): number => {
+  let result = 0;
+  switch (operator) {
+    case "+":
+      result = value ? preValue + value : preValue;
+      break;
+    case "-":
+      result = value ? preValue - value : preValue;
+      break;
+    case "X":
+      result = value ? preValue * value : preValue;
+      break;
+    case "/":
+      result = value ? preValue / value : preValue;
+      break;
+    case "=":
+    default:
+      console.log("error");
+      break;
+  }
+  return result;
+};
+
+const updateValue = (state: CalState, inputValue: string): void => {
+  if (state.value < 0) {
+    state.input = -state.value + inputValue;
+  } else {
+    state.input += inputValue;
+  }
+  state.value = +state.input;
+};
+
 const calSlice = createSlice({
   name: "cal",
   initialState,
   reducers: {
     operate: (state, action: PayloadAction<string>) => {
-      console.log(JSON.parse(JSON.stringify(state)).operator);
-      console.log(current(state).operator);
+      // state.result = state.result
+      //   ? equal(state.operator, state.preValue, state.value)
+      //   : state.value;
+      console.log(JSON.stringify(state));
       switch (state.operator) {
         case "+":
           // state.result = state.value ? state.preValue + state.value : state.preValue;
@@ -71,7 +105,6 @@ const calSlice = createSlice({
         state.input = "0.";
       }
     },
-    //sign +/- should change only input and result state
     setSign: (state, action: PayloadAction<string>) => {
       state.value *= -1;
       state.input = state.value ? state.value + "" : "";
