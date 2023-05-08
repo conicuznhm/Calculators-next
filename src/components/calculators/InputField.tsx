@@ -23,19 +23,15 @@ export default function InputField() {
               {/* <InputButton el={el} onClick={(): void => handleNumberClick(el)} /> */}
               <InputButton el={el} onClick={(): any => dispatch(setInput(el))} />
             </div>
-            // <input
-            //   type="button"
-            //   value={el}
-            //   key={el}
-            //   className="border border-black"
-            //   onClick={(): void => handleClick(el)}
-            // />
           ))}
         </div>
         {/* <InputButton el={"+"} onClick={(): void => handleOperateClick("+")} /> */}
-        <InputButton el={"."} onClick={(): any => dispatch(setInput("."))} />
-        <InputButton el={"+"} onClick={(): any => dispatch(operate("+"))} />
-        <InputButton el={"-"} onClick={(): any => dispatch(operate("-"))} />
+        <InputButton el={"."} onClick={() => dispatch(setInput("."))} />
+        <InputButton el={"+"} onClick={() => dispatch(operate("+"))} />
+        <InputButton el={"-"} onClick={() => dispatch(operate("-"))} />
+        <InputButton el={"X"} onClick={() => dispatch(operate("X"))} />
+        <InputButton el={"/"} onClick={() => dispatch(operate("/"))} />
+        <InputButton el={"="} onClick={() => dispatch(operate("="))} />
       </div>
     </>
   );
