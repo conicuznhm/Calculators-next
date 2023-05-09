@@ -50,6 +50,10 @@ const calSlice = createSlice({
       state.input = initialState.input;
     },
     setInput: (state, action: PayloadAction<string>) => {
+      // if(state.input==="-0"){
+      //   state.input = "-"
+      // }
+      state.input = state.input === "-0" ? "-" : state.input;
       state.input += action.payload;
       state.value = +state.input;
       state.result = state.input;
@@ -68,6 +72,7 @@ const calSlice = createSlice({
           ? (state.result = state.result.slice(1))
           : (state.result = "-" + state.result)
         : (state.result = "-0");
+      //state.sign?
       state.input = state.result;
       state.value ? (state.value = +state.result) : (state.preValue *= -1);
     },

@@ -148,6 +148,10 @@ export default calSlice.reducer;
 //       state.input = initialState.input;
 //     },
 //     setInput: (state, action: PayloadAction<string>) => {
+//       // if(state.input==="-0"){
+//       //   state.input = "-"
+//       // }
+//       state.input = state.input === "-0" ? "-" : state.input;
 //       state.input += action.payload;
 //       state.value = +state.input;
 //       state.result = state.input;
