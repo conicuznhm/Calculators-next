@@ -54,29 +54,27 @@ const calSlice = createSlice({
   reducers: {
     operate: (state, action: PayloadAction<string>) => {
       console.log(JSON.stringify(state));
-      switch (state.operator) {
-        case "+":
-          // state.result = state.value ? state.preValue + state.value : state.preValue;
-          state.preValue = state.value ? state.preValue + state.value : state.preValue;
-          break;
-        case "-":
-          state.preValue = state.value ? state.preValue - state.value : state.preValue;
-          break;
-        case "X":
-          state.preValue = state.value ? state.preValue * state.value : state.preValue;
-          break;
-        case "/":
-          state.preValue = state.value ? state.preValue / state.value : state.preValue;
-          break;
-        default:
-          state.preValue = state.value;
-          break;
+      if (state.value) {
+        switch (state.operator) {
+          case "+":
+            state.preValue = state.preValue + state.value;
+            break;
+          case "-":
+            state.preValue = state.preValue - state.value;
+            break;
+          case "X":
+            state.preValue = state.preValue * state.value;
+            break;
+          case "/":
+            state.preValue = state.preValue / state.value;
+            break;
+          default:
+            state.preValue = state.value;
+            break;
+        }
       }
-
-      if (action.payload !== "=") {
-        state.operator = action.payload;
-        state.value = initialState.value;
-      }
+      state.operator = action.payload;
+      state.value = initialState.value;
       state.result = state.preValue + "";
       state.input = initialState.input;
     },
@@ -100,8 +98,9 @@ const calSlice = createSlice({
           : (state.result = "-" + state.result)
         : (state.result = "-0");
       state.input = state.result;
-      state.value = +state.result;
+      state.value ? (state.value = +state.result) : (state.preValue *= -1);
     },
+    setEqual: () => {},
     clear: (state, action: PayloadAction<string>) => {
       if (action.payload === "AC") {
         return initialState;
@@ -110,5 +109,5 @@ const calSlice = createSlice({
   }
 });
 
-export const { operate, setInput, setDot, setSign, clear } = calSlice.actions;
+export const { operate, setInput, setDot, setSign, setEqual, clear } = calSlice.actions;
 export default calSlice.reducer;
