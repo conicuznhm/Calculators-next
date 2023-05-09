@@ -5,6 +5,7 @@ interface CalState {
   preValue: number;
   result: string;
   operator: string;
+  opEqual: string;
   input: string;
 }
 
@@ -13,6 +14,7 @@ const initialState: CalState = {
   preValue: 0,
   result: "",
   operator: "",
+  opEqual: "",
   input: ""
 };
 
@@ -25,22 +27,23 @@ const calSlice = createSlice({
       if (state.value) {
         switch (state.operator) {
           case "+":
-            state.preValue = state.preValue + state.value;
+            state.preValue += state.value;
             break;
           case "-":
-            state.preValue = state.preValue - state.value;
+            state.preValue -= state.value;
             break;
           case "X":
-            state.preValue = state.preValue * state.value;
+            state.preValue *= state.value;
             break;
           case "/":
-            state.preValue = state.preValue / state.value;
+            state.preValue /= state.value;
             break;
           default:
-            state.preValue = state.value;
+            state.preValue = state.opEqual ? state.preValue : state.value;
             break;
         }
       }
+      state.opEqual = initialState.opEqual;
       state.operator = action.payload;
       state.value = initialState.value;
       state.result = state.preValue + "";
@@ -68,7 +71,36 @@ const calSlice = createSlice({
       state.input = state.result;
       state.value ? (state.value = +state.result) : (state.preValue *= -1);
     },
-    setEqual: () => {},
+    setEqual: (state, action: PayloadAction<string>) => {
+      // if (state.operator) {
+      //   state.opEqual = state.operator;
+      // }
+      // if (!state.value) {
+      //   state.value = state.preValue;
+      // }
+      state.opEqual = state.operator ? state.operator : state.opEqual;
+      state.value = state.value ? state.value : state.preValue;
+      state.operator = initialState.operator;
+      switch (state.opEqual) {
+        case "+":
+          state.preValue += state.value;
+          break;
+        case "-":
+          state.preValue -= state.value;
+          break;
+        case "X":
+          state.preValue *= state.value;
+          break;
+        case "/":
+          state.preValue /= state.value;
+          break;
+        default:
+          state.preValue = state.value;
+          break;
+      }
+      state.result = state.preValue + "";
+      state.input = initialState.input;
+    },
     clear: (state, action: PayloadAction<string>) => {
       if (action.payload === "AC") {
         return initialState;

@@ -9,6 +9,7 @@ interface RootState {
     preValue: number;
     result: string;
     operator: string;
+    opEqual: string;
     input: string;
   };
   user: {
