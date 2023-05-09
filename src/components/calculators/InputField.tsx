@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@/redux/store";
 import InputButton from "./InputButton";
-import { operate, setInput, setSign, clear } from "@/redux/cal-slice";
+import { operate, setInput, setSign, setDot, clear } from "@/redux/cal-slice";
 export default function InputField() {
   const numPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
   // const numPad = ["+", "-", "X", "/"];
@@ -26,7 +26,7 @@ export default function InputField() {
           ))}
         </div>
         {/* <InputButton el={"+"} onClick={(): void => handleOperateClick("+")} /> */}
-        <InputButton el={"."} onClick={() => dispatch(setInput("."))} />
+        <InputButton el={"."} onClick={() => dispatch(setDot("."))} />
         <InputButton el={"+"} onClick={() => dispatch(operate("+"))} />
         <InputButton el={"-"} onClick={() => dispatch(operate("-"))} />
         <InputButton el={"X"} onClick={() => dispatch(operate("X"))} />

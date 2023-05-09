@@ -49,15 +49,11 @@ const calSlice = createSlice({
       state.input = initialState.input;
     },
     setInput: (state, action: PayloadAction<string>) => {
-      state.input += action.payload;
-      state.value = +state.input;
-      state.result = state.input;
-    },
-    setDot: (state, action: PayloadAction<string>) => {
-      if (!state.input.includes(".")) {
-        state.input ? (state.input += ".") : (state.input = "0.");
-      } else {
-        state;
+      if (action.payload === "." && !state.input.includes(".")) {
+        state.input ? (state.input += action.payload) : (state.input = "0.");
+      } else if (!isNaN(Number(action.payload))) {
+        state.input += action.payload;
+        state.value = +state.input;
       }
       state.result = state.input;
     },
@@ -78,5 +74,18 @@ const calSlice = createSlice({
   }
 });
 
-export const { operate, setInput, setDot, setSign, clear } = calSlice.actions;
+export const { operate, setInput, setSign, clear } = calSlice.actions;
 export default calSlice.reducer;
+
+// setInput: (state, action: PayloadAction<string>) => {
+//   if (action.payload === "." && !state.input.includes(".")) {
+//     state.input += action.payload;
+//   } else if (!isNaN(Number(action.payload))) {
+//     state.input += action.payload;
+//     state.value = +state.input;
+//   }
+//   if (state.input === ".") {
+//     state.input = "0.";
+//   }
+//   state.result = state.input;
+// },

@@ -19,7 +19,8 @@ interface RootState {
 
 export const store = configureStore({
   reducer: {
-    cal: calReducer2
+    cal: calReducer
+    // cal: calReducer2
   }
 });
 
