@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import calReducer from "./cal-slice";
+import calReducer2 from "./cal-slice2";
 
 interface RootState {
   cal: {
     value: number;
     preValue: number;
-    result: number;
+    result: string;
     operator: string;
     input: string;
   };
@@ -18,7 +19,7 @@ interface RootState {
 
 export const store = configureStore({
   reducer: {
-    cal: calReducer
+    cal: calReducer2
   }
 });
 

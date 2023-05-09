@@ -5,7 +5,8 @@ export default function Screen() {
   return (
     <>
       <div className="text-white">Screen</div>
-      <div className="text-white">{input ? input : result}</div>
+      {/* <div className="text-white">{input ? input : result}</div> */}
+      <div className="text-white">{result || "0"}</div>
     </>
   );
 }

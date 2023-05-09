@@ -3,7 +3,7 @@ import { createSlice, PayloadAction, current } from "@reduxjs/toolkit";
 interface CalState {
   value: number;
   preValue: number;
-  result: number;
+  result: string;
   operator: string;
   input: string;
 }
@@ -11,7 +11,7 @@ interface CalState {
 const initialState: CalState = {
   value: 0,
   preValue: 0,
-  result: 0,
+  result: "",
   operator: "",
   input: ""
 };
@@ -57,59 +57,53 @@ const calSlice = createSlice({
       //   ? equal(state.operator, state.preValue, state.value)
       //   : state.value;
       console.log(JSON.stringify(state));
+      // state.preValue = +state.result;
       switch (state.operator) {
         case "+":
           // state.result = state.value ? state.preValue + state.value : state.preValue;
-          state.result = state.value ? state.preValue + state.value : state.result;
+          state.preValue = state.value ? state.preValue + state.value : state.preValue;
           break;
         case "-":
-          state.result = state.value ? state.preValue - state.value : state.result;
+          state.preValue = state.value ? state.preValue - state.value : state.preValue;
           break;
         case "X":
-          state.result = state.value ? state.preValue * state.value : state.result;
+          state.preValue = state.value ? state.preValue * state.value : state.preValue;
           break;
         case "/":
-          state.result = state.value ? state.preValue / state.value : state.result;
+          state.preValue = state.value ? state.preValue / state.value : state.preValue;
           break;
         default:
-          state.result = state.value;
+          state.preValue = state.value;
           break;
       }
-      // if (action.payload === "=") {
-      //   state;
-      // } else {
-      //   state.operator = action.payload;
-      //   state.value = initialState.value;
-      // }
+
       if (action.payload !== "=") {
         state.operator = action.payload;
         state.value = initialState.value;
       }
-      state.preValue = state.result;
+      state.result = state.preValue + "";
       state.input = initialState.input;
     },
     setInput: (state, action: PayloadAction<string>) => {
       if (action.payload === "." && !state.input.includes(".")) {
         state.input += action.payload;
       } else if (!isNaN(Number(action.payload))) {
-        if (state.value < 0) {
-          // state.input = (-state.value).toString() + action.payload;
-          state.input = -state.value + action.payload;
-          state.value = +state.input * -1;
-        } else {
-          state.input += action.payload;
-          state.value = +state.input;
-        }
+        state.input += action.payload;
+        state.value = +state.input;
       }
       if (state.input === ".") {
         state.input = "0.";
+        state.result = state.input;
+      } else {
+        state.result = state.input;
       }
     },
     setSign: (state, action: PayloadAction<string>) => {
-      state.value *= -1;
-      state.input = state.value ? state.value + "" : "";
-      state.result *= -1;
-      // state.preValue *= -1;
+      state.result[0] === "-"
+        ? (state.result = state.result.slice(1))
+        : (state.result = "-" + state.result);
+      state.input = state.result;
+      state.value = +state.result;
     },
     clear: (state, action: PayloadAction<string>) => {
       if (action.payload === "AC") {
