@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@/redux/store";
 import InputButton from "./InputButton";
-import { operate, setEqual, setInput, setSign, setDot, clear } from "@/redux/cal-slice";
+import { operate, setEqual, setInput, setSign, setDot, clear } from "@/redux/cal-slice2";
 export default function InputField() {
   const numPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
   // const numPad = ["+", "-", "X", "/"];

@@ -20,10 +20,11 @@ interface RootState {
 
 export const store = configureStore({
   reducer: {
-    cal: calReducer
-    // cal: calReducer2
+    // cal: calReducer
+    cal: calReducer2
   }
 });
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const useAppDispatch = () => useDispatch();
+// export interface CalState extends Pick<RootState, "cal"> {}

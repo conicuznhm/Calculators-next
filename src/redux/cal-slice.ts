@@ -24,6 +24,7 @@ const calSlice = createSlice({
   reducers: {
     operate: (state, action: PayloadAction<string>) => {
       console.log(JSON.stringify(state));
+      state.input = initialState.input;
       if (state.value) {
         switch (state.operator) {
           case "+":
@@ -47,7 +48,7 @@ const calSlice = createSlice({
       state.operator = action.payload;
       state.value = initialState.value;
       state.result = state.preValue + "";
-      state.input = initialState.input;
+      // state.input = initialState.input;
     },
     setInput: (state, action: PayloadAction<string>) => {
       // if(state.input==="-0"){
@@ -61,8 +62,6 @@ const calSlice = createSlice({
     setDot: (state, action: PayloadAction<string>) => {
       if (!state.input.includes(".")) {
         state.input ? (state.input += ".") : (state.input = "0.");
-      } else {
-        state;
       }
       state.result = state.input;
     },
@@ -77,12 +76,14 @@ const calSlice = createSlice({
       state.value ? (state.value = +state.result) : (state.preValue *= -1);
     },
     setEqual: (state, action: PayloadAction<string>) => {
+      // state.input = initialState.input;
       // if (state.operator) {
       //   state.opEqual = state.operator;
       // }
       // if (!state.value) {
       //   state.value = state.preValue;
       // }
+      state.input = initialState.input;
       state.opEqual = state.operator ? state.operator : state.opEqual;
       state.value = state.value ? state.value : state.preValue;
       state.operator = initialState.operator;
@@ -104,7 +105,7 @@ const calSlice = createSlice({
           break;
       }
       state.result = state.preValue + "";
-      state.input = initialState.input;
+      // state.input = initialState.input;
     },
     clear: (state, action: PayloadAction<string>) => {
       if (action.payload === "AC") {
