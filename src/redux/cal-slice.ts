@@ -1,6 +1,12 @@
 import { createSlice, PayloadAction, current } from "@reduxjs/toolkit";
+import operateFn from "./reducers/standard/operate-fn";
+import setInputFn from "./reducers/standard/setInput-fn";
+import setDotFn from "./reducers/standard/setDot-fn";
+import setSignFn from "./reducers/standard/setSign-fn";
+import setEqualFn from "./reducers/standard/setEqual-fn";
+import clearFn from "./reducers/standard/clear";
 
-interface CalState {
+export interface CalState {
   value: number;
   preValue: number;
   result: string;
@@ -9,7 +15,7 @@ interface CalState {
   input: string;
 }
 
-const initialState: CalState = {
+export const initialState: CalState = {
   value: 0,
   preValue: 0,
   result: "",
@@ -22,96 +28,12 @@ const calSlice = createSlice({
   name: "cal",
   initialState,
   reducers: {
-    operate: (state, action: PayloadAction<string>) => {
-      console.log(JSON.stringify(state));
-      state.input = initialState.input;
-      if (state.value) {
-        switch (state.operator) {
-          case "+":
-            state.preValue += state.value;
-            break;
-          case "-":
-            state.preValue -= state.value;
-            break;
-          case "X":
-            state.preValue *= state.value;
-            break;
-          case "/":
-            state.preValue /= state.value;
-            break;
-          default:
-            state.preValue = state.opEqual ? state.preValue : state.value;
-            break;
-        }
-      }
-      state.opEqual = initialState.opEqual;
-      state.operator = action.payload;
-      state.value = initialState.value;
-      state.result = state.preValue + "";
-      // state.input = initialState.input;
-    },
-    setInput: (state, action: PayloadAction<string>) => {
-      // if(state.input==="-0"){
-      //   state.input = "-"
-      // }
-      state.input = state.input === "-0" ? "-" : state.input;
-      state.input += action.payload;
-      state.value = +state.input;
-      state.result = state.input;
-    },
-    setDot: (state, action: PayloadAction<string>) => {
-      if (!state.input.includes(".")) {
-        state.input ? (state.input += ".") : (state.input = "0.");
-      }
-      state.result = state.input;
-    },
-    setSign: (state, action: PayloadAction<string>) => {
-      state.result
-        ? state.result[0] === "-"
-          ? (state.result = state.result.slice(1))
-          : (state.result = "-" + state.result)
-        : (state.result = "-0");
-      //state.sign?
-      state.input = state.result;
-      state.value ? (state.value = +state.result) : (state.preValue *= -1);
-    },
-    setEqual: (state, action: PayloadAction<string>) => {
-      // state.input = initialState.input;
-      // if (state.operator) {
-      //   state.opEqual = state.operator;
-      // }
-      // if (!state.value) {
-      //   state.value = state.preValue;
-      // }
-      state.input = initialState.input;
-      state.opEqual = state.operator ? state.operator : state.opEqual;
-      state.value = state.value ? state.value : state.preValue;
-      state.operator = initialState.operator;
-      switch (state.opEqual) {
-        case "+":
-          state.preValue += state.value;
-          break;
-        case "-":
-          state.preValue -= state.value;
-          break;
-        case "X":
-          state.preValue *= state.value;
-          break;
-        case "/":
-          state.preValue /= state.value;
-          break;
-        default:
-          state.preValue = state.value;
-          break;
-      }
-      state.result = state.preValue + "";
-      // state.input = initialState.input;
-    },
-    clear: (state, action: PayloadAction<string>) => {
-      if (action.payload === "AC") {
-        return initialState;
-      }
-    }
+    operate: operateFn,
+    setInput: setInputFn,
+    setDot: setDotFn,
+    setSign: setSignFn,
+    setEqual: setEqualFn,
+    clear: clearFn
   }
 });
 

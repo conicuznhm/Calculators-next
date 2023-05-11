@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
-export default function Header() {
+export default function Header(): JSX.Element {
   const router = useRouter();
   const handleClick = (e: React.MouseEvent): void => {
     // console.log((e.target as HTMLElement).innerText);

@@ -1,5 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { CalState, initialState } from "@/redux/cal-slice2";
+import { CalState, initialState } from "@/redux/cal-slice";
 
 export default function setInputFn(state: CalState, action: PayloadAction<string>) {
   // if(state.input==="-0"){

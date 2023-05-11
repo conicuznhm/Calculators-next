@@ -1,8 +1,8 @@
 import { useAppDispatch } from "@/redux/store";
+import { operate, setEqual, setInput, setSign, setDot, clear } from "@/redux/cal-slice";
 import InputButton from "./InputButton";
-import { operate, setEqual, setInput, setSign, setDot, clear } from "@/redux/cal-slice2";
-export default function InputField() {
-  const numPad = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+import InputNumber from "./InputNumber";
+export default function InputField(): JSX.Element {
   // const numPad = ["+", "-", "X", "/"];
 
   const dispatch = useAppDispatch();
@@ -17,15 +17,9 @@ export default function InputField() {
     <>
       <div>input field</div>
       <div className="w-3/4 h4/6">
-        <div className="flex flex-wrap-reverse">
-          {numPad.map(el => (
-            <div key={el}>
-              {/* <InputButton el={el} onClick={(): void => handleNumberClick(el)} /> */}
-              <InputButton el={el} onClick={(): any => dispatch(setInput(el))} />
-            </div>
-          ))}
-        </div>
+        <InputNumber onClick={el => dispatch(setInput(el))} />
         {/* <InputButton el={"+"} onClick={(): void => handleOperateClick("+")} /> */}
+        {/* <InputButton el={"0"} onClick={() => dispatch(setInput("0"))} /> */}
         <InputButton el={"."} onClick={() => dispatch(setDot("."))} />
         <InputButton el={"+"} onClick={() => dispatch(operate("+"))} />
         <InputButton el={"-"} onClick={() => dispatch(operate("-"))} />

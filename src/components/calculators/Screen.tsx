@@ -1,6 +1,5 @@
-import { useAppSelector, useAppDispatch } from "@/redux/store";
-export default function Screen() {
-  const input = useAppSelector(state => state.cal.input);
+import { useAppSelector } from "@/redux/store";
+export default function Screen(): JSX.Element {
   const result = useAppSelector(state => state.cal.result);
   return (
     <>

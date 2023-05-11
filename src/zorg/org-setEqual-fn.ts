@@ -1,5 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { CalState, initialState } from "@/redux/cal-slice2";
+import { CalState, initialState } from "@/redux/cal-slice";
 import equalFn from "@/redux/functions/standard/equalFn";
 
 //#1

@@ -1,8 +1,9 @@
 import { useAppSelector } from "@/redux/store";
+
 interface ButtonProps {
   el: string;
-  //   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  onClick: () => void;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void; //if need to access to event obj
+  // onClick: () => void;
 }
 
 export default function InputButton({ el, onClick }: ButtonProps): JSX.Element {
