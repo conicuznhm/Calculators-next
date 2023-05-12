@@ -10,6 +10,7 @@ interface RootState {
     operator: string;
     opEqual: string;
     input: string;
+    keepValue: number;
   };
   user: {
     firstName: string;

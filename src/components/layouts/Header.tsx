@@ -19,7 +19,7 @@ export default function Header(): JSX.Element {
           Calculator
         </button> */}
         <Link href="/">Home</Link>
-        <Link href="/calculators/merch">Merchant calculator</Link>
+        <Link href="/calculators/standard">Standard calculator</Link>
         <Link href="/calculators/about">About</Link>
       </div>
     </>

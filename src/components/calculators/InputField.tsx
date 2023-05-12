@@ -2,6 +2,8 @@ import { useAppDispatch } from "@/redux/store";
 import { operate, setEqual, setInput, setSign, setDot, clear } from "@/redux/cal-slice";
 import InputButton from "./InputButton";
 import InputNumber from "./InputNumber";
+import InputOperate from "./InputOperate";
+import InputMisc from "./InputMisc";
 export default function InputField(): JSX.Element {
   // const numPad = ["+", "-", "X", "/"];
 
@@ -16,18 +18,19 @@ export default function InputField(): JSX.Element {
   return (
     <>
       <div>input field</div>
-      <div className="w-3/4 h4/6">
-        <InputNumber onClick={el => dispatch(setInput(el))} />
-        {/* <InputButton el={"+"} onClick={(): void => handleOperateClick("+")} /> */}
-        {/* <InputButton el={"0"} onClick={() => dispatch(setInput("0"))} /> */}
-        <InputButton el={"."} onClick={() => dispatch(setDot("."))} />
-        <InputButton el={"+"} onClick={() => dispatch(operate("+"))} />
-        <InputButton el={"-"} onClick={() => dispatch(operate("-"))} />
-        <InputButton el={"X"} onClick={() => dispatch(operate("X"))} />
-        <InputButton el={"/"} onClick={() => dispatch(operate("/"))} />
-        <InputButton el={"="} onClick={() => dispatch(setEqual("="))} />
-        <InputButton el={"AC"} onClick={() => dispatch(clear("AC"))} />
-        <InputButton el={"+/-"} onClick={() => dispatch(setSign("+/-"))} />
+      <div className="flex flex-col gap-2 ">
+        <div className="flex gap-2">
+          <div className="bg-red-500 w-3/4 ">
+            <InputMisc />
+            <InputNumber onClick={el => dispatch(setInput(el))} />
+            <InputButton el="0" onClick={() => dispatch(setInput("0"))} classWidth="" />
+            <InputButton el={"."} onClick={() => dispatch(setDot("."))} />
+          </div>
+          <div className="bg-blue-500 w-1/4 ">
+            <InputOperate onClick={el => dispatch(operate(el))} />
+            <InputButton el={"="} onClick={() => dispatch(setEqual("="))} />
+          </div>
+        </div>
       </div>
     </>
   );

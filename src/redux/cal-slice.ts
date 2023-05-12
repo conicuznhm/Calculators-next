@@ -5,6 +5,7 @@ import setDotFn from "./reducers/standard/setDot-fn";
 import setSignFn from "./reducers/standard/setSign-fn";
 import setEqualFn from "./reducers/standard/setEqual-fn";
 import clearFn from "./reducers/standard/clear";
+import setPercFn from "./reducers/standard/setPerc-fn";
 
 export interface CalState {
   value: number;
@@ -13,6 +14,7 @@ export interface CalState {
   operator: string;
   opEqual: string;
   input: string;
+  keepValue: number;
 }
 
 export const initialState: CalState = {
@@ -21,7 +23,8 @@ export const initialState: CalState = {
   result: "",
   operator: "",
   opEqual: "",
-  input: ""
+  input: "",
+  keepValue: 0
 };
 
 const calSlice = createSlice({
@@ -33,9 +36,10 @@ const calSlice = createSlice({
     setDot: setDotFn,
     setSign: setSignFn,
     setEqual: setEqualFn,
+    setPerc: setPercFn,
     clear: clearFn
   }
 });
 
-export const { operate, setInput, setDot, setSign, setEqual, clear } = calSlice.actions;
+export const { operate, setInput, setDot, setSign, setEqual, setPerc, clear } = calSlice.actions;
 export default calSlice.reducer;
