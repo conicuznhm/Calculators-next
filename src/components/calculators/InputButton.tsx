@@ -5,20 +5,32 @@ interface ButtonProps {
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void; //if need to access to event obj
   // onClick: () => void;
   classWidth?: string;
+  classRadius?: string;
+  bgColor?: string;
 }
 
-export default function InputButton({ el, onClick, classWidth }: ButtonProps): JSX.Element {
+export default function InputButton({
+  el,
+  onClick,
+  classWidth,
+  classRadius,
+  bgColor
+}: ButtonProps): JSX.Element {
   const op = useAppSelector(state => state.cal.operator);
   return (
-    <button
-      className={`text-white 
-      ${op === el ? "bg-gray-500" : "bg-[rgb(54,52,52)]"}
-       hover:bg-gray-500 rounded-[50%] px-10 py-8 border border-black ${classWidth}`}
-      type="submit"
-      // onClick = {(): void => handleClick(el)}
-      onClick={onClick}
-    >
-      {el}
-    </button>
+    <div className="text-center">
+      <button
+        className={`text-white 
+      ${op === el ? "bg-gray-500" : bgColor || "bg-[rgb(54,52,52)]"}
+       hover:bg-gray-500 ${classRadius || "rounded-[50%]"} h-24 ${
+          classWidth || "w-24"
+        } border border-black m-1 `}
+        type="submit"
+        // onClick = {(): void => handleClick(el)}
+        onClick={onClick}
+      >
+        {el}
+      </button>
+    </div>
   );
 }

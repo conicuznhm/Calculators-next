@@ -9,7 +9,7 @@ export default function InputOperate({ onClick }: OperateProps) {
     <>
       {operator.map(el => (
         <div key={el}>
-          <InputButton el={el} onClick={() => onClick(el)} />
+          <InputButton el={el} onClick={() => onClick(el)} bgColor="bg-[#FF9F0A]" />
         </div>
       ))}
     </>

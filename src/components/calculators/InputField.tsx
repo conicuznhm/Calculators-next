@@ -8,25 +8,27 @@ export default function InputField(): JSX.Element {
   // const numPad = ["+", "-", "X", "/"];
 
   const dispatch = useAppDispatch();
-  // const handleNumberClick = (el: string): void => {
-  //   !isNaN(Number(el)) && dispatch(setInput(el));
-  // };
-  // const handleOperateClick = (el: string): void => {
-  //   dispatch(operate(el));
-  // };
 
   return (
     <>
-      <div>input field</div>
-      <div className="flex flex-col gap-2 ">
-        <div className="flex gap-2">
-          <div className="bg-red-500 w-3/4 ">
+      <div className="flex flex-col">
+        <div className="flex">
+          {/* <div className="bg-red-500 w-3/4"> */}
+          <div className="w-3/4">
             <InputMisc />
             <InputNumber onClick={el => dispatch(setInput(el))} />
-            <InputButton el="0" onClick={() => dispatch(setInput("0"))} classWidth="" />
-            <InputButton el={"."} onClick={() => dispatch(setDot("."))} />
+            <div className="flex justify-center">
+              <InputButton
+                el="0"
+                onClick={() => dispatch(setInput("0"))}
+                classWidth="w-[12.5rem]"
+                classRadius="rounded-[100px]"
+              />
+              <InputButton el={"."} onClick={() => dispatch(setDot("."))} />
+            </div>
           </div>
-          <div className="bg-blue-500 w-1/4 ">
+          {/* <div className="bg-blue-500 w-1/4"> */}
+          <div className="w-1/4">
             <InputOperate onClick={el => dispatch(operate(el))} />
             <InputButton el={"="} onClick={() => dispatch(setEqual("="))} />
           </div>
