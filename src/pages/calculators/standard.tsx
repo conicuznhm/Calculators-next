@@ -1,5 +1,5 @@
 import Container from "@/components/calculators/Container";
-export default function Merch() {
+export default function Standard() {
   return (
     <>
       <div>Standard calculator</div>
